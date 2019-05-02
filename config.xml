@@ -5,6 +5,7 @@
  <preference name="StatusBarOverlaysWebView" value="true" />
  <preference name="orientation" value="portrait" />
  <preference name="KeepRunning" value="true"/>
+ <preference name="android-minSdkVersion" value="14" />
  <name>Game 9</name>
  <icon src="" />
 
