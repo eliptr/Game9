@@ -13,6 +13,7 @@ function onDeviceReady() {
 
 function onPause() {
   localStorage.ogls = og;
+  localStorage.unlogls = Date();
 }
 
 function onResume() {
@@ -27,6 +28,7 @@ var windowHeight = window.innerHeight;
 var pixelRatio = window.devicePixelRatio || 1; /// get pixel ratio of device
 
 var og = 100;
+var unlog = "Hello, World!";
 
 // load images
 
@@ -54,6 +56,12 @@ function test() {
     og = 100;
   }
 
+  if (localStorage.unlogls) {
+    unlog = localStorage.getItem('unlogls');
+  } else {
+    unlog = "First time?";
+  }
+
   draw()
   down()
 }
@@ -68,8 +76,10 @@ function draw() {
 
 
   //drawImage
-  ctx.font = "30px Arial";
+  ctx.font = "40px Arial";
   ctx.fillText(og + "%", 10, 50);
+  ctx.font = "35px Arial";
+  ctx.fillText(unlog, 10, 150);
 
 
 
