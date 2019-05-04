@@ -13,7 +13,7 @@ function onDeviceReady() {
 
 function onPause() {
   localStorage.ogls = og;
-  localStorage.unlogls = Date();
+  localStorage.unlogls = new Date();
 }
 
 function onResume() {
@@ -29,12 +29,18 @@ var pixelRatio = window.devicePixelRatio || 1; /// get pixel ratio of device
 
 var og = 100;
 var unlog = "Hello, World!";
+var log = Date();
+
+var d1; //"now"
+var d2 = Date.parse(localStorage.getItem('unlogls'));
+var diff;  // difference in milliseconds
+var finaldif = "Hello, World!";
 
 // load images
 
 
 
-// onlaod runs one time and in the end runs draw with requestAnimationFrame
+// onlaod runs one time and in the end runs draw() with requestAnimationFrame
 function test() {
   windowWidth = window.innerWidth;
   windowHeight = window.innerHeight;
@@ -48,6 +54,14 @@ function test() {
   canvasMain.style.width = windowWidth + 'px';   /// CSS size of canvas
   canvasMain.style.height = windowHeight + 'px';
 
+  log = Date();
+
+  d1 = new Date(); //"now"
+  d2 = localStorage.unlog;
+  diff = Math.abs(d1-d2);  // difference in milliseconds
+  finaldif = Math.floor(diff / 1000);
+
+
   // positions var
 
   if (localStorage.ogls) {
@@ -58,12 +72,16 @@ function test() {
 
   if (localStorage.unlogls) {
     unlog = localStorage.getItem('unlogls');
+    d1 = new Date(); //"now"
+    d2 = Date.parse(localStorage.getItem('unlogls'));
+    diff = Math.abs(d1-d2);  // difference in milliseconds
+    finaldif = Math.floor(diff / 1000);
   } else {
     unlog = "First time?";
+    finaldif = "Sorry...";
   }
 
   draw()
-  down()
 }
 
 // runs after test is finished and has an requestAnimationFrame
@@ -80,6 +98,8 @@ function draw() {
   ctx.fillText(og + "%", 10, 50);
   ctx.font = "35px Arial";
   ctx.fillText(unlog, 10, 150);
+  ctx.fillText(log, 10, 200);
+  ctx.fillText(finaldif, 10, 300);
 
 
 
