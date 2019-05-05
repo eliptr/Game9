@@ -84,7 +84,7 @@ function test() {
 
   if (localStorage.ogls) {
     before = localStorage.getItem('ogls');
-    og = Math.round(Number(before) - (finaldif / 5));
+    og = Math.round(Number(before) - (finaldif / 18));
   } else {
     og = 100;
   }
@@ -120,7 +120,7 @@ function draw() {
 
 setInterval(function () {
   og = og - down;
-}, 5000);
+}, 18000);
 
 function stop() {
   if (og <= 0) {
