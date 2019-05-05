@@ -1,5 +1,6 @@
 var canvasMain = document.getElementById('canvas');
 var ctx = canvasMain.getContext('2d');
+var fill = document.getElementById('fill');
 
 function onload() {
   document.addEventListener("deviceready", onDeviceReady, false);
@@ -36,6 +37,8 @@ var d2 = Date.parse(localStorage.getItem('unlogls'));
 var diff;  // difference in milliseconds
 var finaldif = "Hello, World!";
 
+var down = 1;
+var before;
 // load images
 
 
@@ -54,6 +57,9 @@ function test() {
   canvasMain.style.width = windowWidth + 'px';   /// CSS size of canvas
   canvasMain.style.height = windowHeight + 'px';
 
+  fill.style.top = 140 + "px";
+  fill.style.left = 10 + "px";
+
   log = Date();
 
   d1 = new Date(); //"now"
@@ -64,11 +70,6 @@ function test() {
 
   // positions var
 
-  if (localStorage.ogls) {
-    og = localStorage.getItem('ogls');
-  } else {
-    og = 100;
-  }
 
   if (localStorage.unlogls) {
     unlog = localStorage.getItem('unlogls');
@@ -80,6 +81,14 @@ function test() {
     unlog = "First time?";
     finaldif = "Sorry...";
   }
+
+  if (localStorage.ogls) {
+    before = localStorage.getItem('ogls');
+    og = Math.round(Number(before) - (finaldif / 5));
+  } else {
+    og = 100;
+  }
+
 
   draw()
 }
@@ -105,12 +114,30 @@ function draw() {
 
   //requestAnimationFrame
   requestAnimationFrame(draw, 10);
+  requestAnimationFrame(stop, 10);
 }
 
 
 setInterval(function () {
-  og = og - 1;
+  og = og - down;
 }, 5000);
+
+function stop() {
+  if (og <= 0) {
+    down = 0;
+    og = 0;
+  } else {
+    down = 1;
+  }
+  if (og > 100) {
+    og = 100;
+  }
+}
+
+function fillcl() {
+  og = og + 10;
+  down = 1;
+}
 /*function counter() {
     var i = 0;
     var num = 0;
